@@ -1,0 +1,20 @@
+{
+    "seed": "42",
+    "sum_model": "Yale-LILY/brio-cnndm-uncased",
+    "train_batch_size": "6",
+    "valid_batch_size": "6",
+    "learning_rate": "1e-05",
+    "max_seq_length": "256",
+    "adam_epsilon": "1e-08",
+    "weight_decay": "0.0001",
+    "warmup_steps": "5",
+    "num_train_epochs": "7",
+    "custom_loss": "False",
+    "gradient_accumulation_steps": "1",
+    "n_gpu": "1",
+    "nb_sanity_val_steps": "-1",
+    "train_sample_size": "1",
+    "valid_sample_size": "1",
+    "device": "cuda",
+    "output_dir": "/content/drive/MyDrive/easy-summary-main/SimSum/experiments/exp_1713802228833624"
+}

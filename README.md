@@ -65,10 +65,6 @@ To completely train and evaluate
 ```bash
 NLP_SIMSUM_Project.ipynb
 ```
-
-### Human Evaluation
-For human evaluation, manually assess the generated simplified documents for readability, simplicity, and content retention.
-
 ## Results
 - **SARI**: Measures how well the model simplifies the text.
 - **D-SARI**: A variant of SARI for document-level simplification.

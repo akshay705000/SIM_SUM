@@ -98,10 +98,7 @@ class BartBaseLineFineTuned(pl.LightningModule):
         )
 
         if self.args.custom_loss:
-
             loss = outputs.loss
-
-            
             self.log('train_loss', loss, on_step=True, prog_bar=True, logger=True)
             # print(loss)
             return loss
@@ -111,13 +108,11 @@ class BartBaseLineFineTuned(pl.LightningModule):
             #print(loss)
             return loss
 
-
     def validation_step(self, batch, batch_idx):
         loss = self.sari_validation_step(batch)
         # loss = self._step(batch)
         print("Val_loss", loss)
         logs = {"val_loss": loss}
-
         self.log('val_loss', loss, batch_size = self.args.valid_batch_size)
         return torch.tensor(loss, dtype=float)
 
@@ -375,12 +370,12 @@ def train(args):
         os.makedirs(args.output_dir)
 
     # Define ModelCheckpoint callback
-    checkpoint_callback = pl.callbacks.ModelCheckpoint(
-        dirpath=args.output_dir,  # Directory to save checkpoints
-        filename='checkpoint-{epoch}',  # Naming pattern for checkpoint files
-        save_top_k=-1,  # Save all checkpoints
-        monitor=None  # Don't monitor any metric, save after each epoch
-    )
+    # checkpoint_callback = pl.callbacks.ModelCheckpoint(
+    #     dirpath=args.output_dir,  # Directory to save checkpoints
+    #     filename='checkpoint-{epoch}',  # Naming pattern for checkpoint files
+    #     save_top_k=-1,  # Save all checkpoints
+    #     monitor=None  # Don't monitor any metric, save after each epoch
+    # )
 
     # checkpoint_callback = pl.callbacks.ModelCheckpoint(
     #     dirpath= os.path.join(args.output_dir, "checkpoints"),
@@ -394,14 +389,14 @@ def train(args):
     #     save_last=True  # Save the last checkpoint (after each epoch)
     # )
 
-    # checkpoint_callback = pl.callbacks.ModelCheckpoint(
-    #     dirpath=args.output_dir,
-    #     filename="checkpoint-{epoch}",
-    #     monitor="val_loss",
-    #     verbose=True,
-    #     mode="min",
-    #     save_top_k=1
-    # )
+    checkpoint_callback = pl.callbacks.ModelCheckpoint(
+        dirpath=args.output_dir,
+        filename="checkpoint-{epoch}",
+        monitor="val_loss",
+        verbose=True,
+        mode="min",
+        save_top_k=1
+    )
 
     # #debudding code
     # print(args.output_dir)
@@ -463,5 +458,5 @@ def train(args):
 
     print("training finished")
 
-    # print("Saving model")
-    # model.model.save_pretrained(args.output_dir)
+    print("Saving model")
+    model.model.save_pretrained(args.output_dir)
